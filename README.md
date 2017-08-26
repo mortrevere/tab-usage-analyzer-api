@@ -6,7 +6,7 @@ API for the tab-usage-analyzer project
 
 > POST /update
 
-```JSON
+```
 { token : (String),
   tabs : [{
     id : (String)
