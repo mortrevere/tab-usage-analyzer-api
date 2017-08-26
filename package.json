@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/mortrevere/tab-usage-analyzer-api/issues"
   },
-  "homepage": "https://github.com/mortrevere/tab-usage-analyzer-api#readme"
+  "homepage": "https://github.com/mortrevere/tab-usage-analyzer-api#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "pg": "^7.2.0"
+  }
 }
