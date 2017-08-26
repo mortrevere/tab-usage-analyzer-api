@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cors = require('cors');
 var fs = require('fs');
-var pg = require('pg');
 
 app.enable('trust proxy');
 app.use(cors());
@@ -24,7 +23,13 @@ app.all('*', function(req, res, next) {
 });
 
 
-var routes = require('./routes')(app, pg);
+var models = require('./models');
+var routes = require('./routes')(app);
+
+
+app.get('/', function(req, res) {
+  res.status(200).end('Welcome to the TUA API. See docs at https://github.com/mortrevere/tab-usage-analyzer-api');
+});
 
 app.use(function(req,res) {
   res.status(403).json({ error: 4, info: 'Bad method.'});
