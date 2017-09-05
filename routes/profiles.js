@@ -33,15 +33,49 @@ module.exports = function(app, models) {
   app.put('/profile/:id/tab', function(req, res) {
 
     models.Profiles.find({ where : { token : req.params.id }}).then(function(profile) {
-      console.log(profile);
-      models.Tabs.create().then(function(tab) {
-        tab.setProfile(profile);
-        res.json({id : tab.id});
+      if(!profile)
+        return res.json({error : 'Profile not found'});
+
+      genid(function(token) {
+        models.Tabs.create({token : token}).then(function(tab) {
+          tab.setProfile(profile);
+          res.json({id : tab.token});
+        });
       });
     });
+  });
 
+  app.put('/profile/:pid/tab/:tid/action', function(req, res) {
+    if(!req.body.type) return res.json({error : 'Argument type missing'});
+    if(req.body.type === 'url' && !req.body.value) return res.json({error : 'Argument value missing'});
 
+    models.Profiles.find({ where : { token : req.params.pid }}).then(function(profile) {
+      if(!profile)
+        return res.json({error : 'Profile not found'});
 
+      models.Tabs.find({ where : { token : req.params.tid }}).then(function(tab) {
+        if(!tab)
+          return res.json({error : 'Tab not found'});
+
+        models.Actions.create({ type : req.body.type, value : req.body.type === 'url' ? req.body.value : ''}).then(function(action) {
+          action.setTab(tab);
+          res.json({done : true});
+        });
+      });
+    });
+  });
+
+  app.get('/profile/:id', function(req, res) {
+    models.Profiles.find({ where : { token : req.params.id },
+                           include : [{
+                             model : models.Tabs,
+                             include : [{
+                               model : models.Actions
+                             }]
+                           }]
+                         }).then(function(profile) {
+                           res.json(profile);
+                         });
   });
 
 }

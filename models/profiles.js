@@ -12,7 +12,7 @@ module.exports = function(sequelize, datatype) {
   });
 
   model.associate = function(models) {
-
+    model.hasMany(models.Tabs);
   }
 
   return model;

@@ -24,9 +24,32 @@ Register a new tab
 
 ```
 {
-  "id" : (int)
+  "id" : (string)
 }
 ```
+
+> PUT /profile/**profile_id**/tab/**tab_id**/action
+
+Register a new action
+
+**Parameters** :
+
+```
+type : (String) ('enter'|'leave'|'close'|'url'),
+value : (String) (optional)
+```
+
+**Response** :
+
+```
+{
+  "done" : (boolean)
+}
+```
+
+> GET /profile/**id**
+
+Grosse flemme, just test it
 
 
 ## Tabs data description model proposition
