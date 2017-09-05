@@ -2,7 +2,36 @@
 
 API for the tab-usage-analyzer project
 
-## Tabs data description model
+## Implemented for now
+
+> PUT /profile
+
+Creates a profile
+
+**Response** :
+
+```
+{
+  "id" : (string)
+}
+```
+
+> PUT /profile/**id**/tab
+
+Register a new tab
+
+**Response** :
+
+```
+{
+  "id" : (int)
+}
+```
+
+
+## Tabs data description model proposition
+
+
 
 > POST /update
 

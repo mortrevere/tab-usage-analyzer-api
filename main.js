@@ -24,16 +24,20 @@ app.all('*', function(req, res, next) {
 
 
 var models = require('./models');
-var routes = require('./routes')(app);
+var routes = require('./routes')(app, models);
 
 
 app.get('/', function(req, res) {
   res.status(200).end('Welcome to the TUA API. See docs at https://github.com/mortrevere/tab-usage-analyzer-api');
 });
 
+models.sequelize.sync().then(function () {
+
 app.use(function(req,res) {
   res.status(403).json({ error: 4, info: 'Bad method.'});
 })
 .listen(6969, 'localhost');
+
+});
 
 console.log('TUA API running on port 6969');

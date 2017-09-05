@@ -3,7 +3,7 @@ var path = require("path");
 var Sequelize = require("sequelize");
 var config = require("../config.js");
 
-var sequelize = new Sequelize('usr', 'db', 'pw', {
+var sequelize = new Sequelize('tua', 'oasis', 'rektum', {
   host : config.db.host,
   dialect : 'postgres',
   logging : config.db.logging,
